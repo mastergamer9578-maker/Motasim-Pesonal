@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/jpg" href="logo.jpg">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Muhammad Motasim — Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#0a0a0c;
+  --surface:#111115;
+  --surface2:#18181e;
+  --border:rgba(255,255,255,0.08);
+  --accent:#c8f04d;
+  --accent2:#6ee7f7;
+  --text:#e8e8f0;
+  --muted:#6b6b80;
+  --mono:'Space Mono',monospace;
+  --display:'Syne',sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--mono);
+  font-size:14px;
+  line-height:1.7;
+  overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.025) 2px,rgba(0,0,0,0.025) 4px);
+  pointer-events:none;z-index:999;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 2.5rem;
+  background:rgba(10,10,12,0.92);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:var(--display);font-weight:800;font-size:1rem;color:var(--accent);letter-spacing:-0.01em;}
+.nav-links{display:flex;gap:2rem;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;transition:color 0.2s;}
+.nav-links a:hover{color:var(--accent);}
+
+/* HERO */
+.hero{
+  padding:6.5rem 2.5rem 0;
+  position:relative;overflow:hidden;
+  border-bottom:1px solid var(--border);
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,0.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.022) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(ellipse 90% 80% at 40% 40%,black 30%,transparent 80%);
+}
+.hero-inner{position:relative;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:end;padding-bottom:0;}
+.status-badge{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  padding:0.3rem 0.85rem;
+  border:1px solid rgba(110,231,247,0.25);
+  background:rgba(110,231,247,0.06);
+  font-size:10px;color:var(--accent2);
+  letter-spacing:0.1em;margin-bottom:1rem;width:fit-content;
+}
+.status-dot{width:5px;height:5px;border-radius:50%;background:var(--accent2);animation:blink 1.5s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.15;}}
+.hero-eyebrow{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin-bottom:0.8rem;display:flex;align-items:center;gap:0.6rem;}
+.hero-eyebrow::before{content:'';width:20px;height:1px;background:var(--accent);}
+h1.hero-name{
+  font-family:var(--display);
+  font-size:clamp(2.8rem,8vw,5.5rem);
+  font-weight:800;line-height:0.97;
+  letter-spacing:-0.04em;
+  color:var(--text);margin-bottom:0.5rem;
+}
+h1.hero-name span{color:var(--accent);}
+.hero-role{
+  font-family:var(--display);
+  font-size:clamp(1rem,2.5vw,1.6rem);
+  font-weight:400;color:var(--muted);
+  letter-spacing:-0.01em;margin-bottom:1.25rem;
+}
+.hero-desc{
+  max-width:460px;color:var(--muted);
+  font-size:12px;line-height:1.95;margin-bottom:1.75rem;
+}
+.hero-cta{display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:2.5rem;}
+.btn{display:inline-flex;align-items:center;gap:0.4rem;padding:0.6rem 1.4rem;font-family:var(--mono);font-size:11px;letter-spacing:0.05em;text-decoration:none;border:1px solid;cursor:pointer;transition:all 0.2s;background:none;}
+.btn-primary{background:var(--accent);color:#0a0a0c;border-color:var(--accent);font-weight:700;}
+.btn-primary:hover{background:#d4f560;}
+.btn-outline{color:var(--text);border-color:var(--border);}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent);}
+
+/* Hero right side — big decorative text */
+.hero-deco{
+  font-family:var(--display);
+  font-size:clamp(6rem,14vw,11rem);
+  font-weight:800;
+  line-height:1;
+  color:rgba(200,240,77,0.04);
+  letter-spacing:-0.05em;
+  user-select:none;
+  padding-bottom:1rem;
+  white-space:nowrap;
+}
+
+/* DIVIDER ROW */
+.ticker{
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  padding:0.6rem 0;
+  overflow:hidden;
+  white-space:nowrap;
+  background:var(--surface);
+}
+.ticker-inner{
+  display:inline-flex;gap:3rem;
+  animation:marquee 18s linear infinite;
+}
+.ticker-inner span{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);}
+.ticker-inner span.accent{color:var(--accent);}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* ABOUT */
+#about{
+  display:grid;grid-template-columns:1fr 1fr;
+  border-bottom:1px solid var(--border);
+}
+.about-left{
+  padding:3rem 2.5rem;
+  border-right:1px solid var(--border);
+}
+.about-right{padding:3rem 2.5rem;}
+.section-label{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem;}
+.section-title{font-family:var(--display);font-size:clamp(1.4rem,3vw,2rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:1.25rem;color:var(--text);}
+.about-text{font-size:12px;color:var(--muted);line-height:1.95;}
+.about-text p+p{margin-top:0.75rem;}
+.stat-row{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:1.5rem;}
+.stat-box{background:var(--surface2);padding:1.1rem 1.25rem;}
+.stat-num{font-family:var(--display);font-size:1.7rem;font-weight:800;color:var(--accent);display:block;line-height:1;}
+.stat-lbl{font-size:10px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;margin-top:0.25rem;}
+.interest-list{display:flex;flex-direction:column;gap:0.5rem;margin-top:1.25rem;}
+.interest-item{
+  display:flex;align-items:center;gap:0.75rem;
+  padding:0.7rem 1rem;
+  border:1px solid var(--border);
+  background:var(--surface);
+  font-size:12px;color:var(--text);
+  transition:border-color 0.2s,background 0.2s;
+}
+.interest-item:hover{border-color:var(--accent);background:var(--surface2);}
+.interest-icon{color:var(--accent);font-size:1rem;min-width:18px;}
+.interest-sub{font-size:10px;color:var(--muted);margin-left:auto;letter-spacing:0.05em;}
+
+/* SKILLS */
+#skills{border-bottom:1px solid var(--border);}
+.skills-header{padding:2.5rem 2.5rem 1.5rem;}
+.skills-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--border);
+  border-top:1px solid var(--border);
+}
+.skill-card{background:var(--surface);padding:1.5rem;transition:background 0.2s;}
+.skill-card:hover{background:var(--surface2);}
+.skill-icon{font-size:1.3rem;margin-bottom:0.6rem;}
+.skill-name{font-family:var(--display);font-weight:700;font-size:0.9rem;margin-bottom:0.35rem;color:var(--text);}
+.skill-desc{font-size:11px;color:var(--muted);line-height:1.75;}
+.skill-tags{display:flex;flex-wrap:wrap;gap:0.3rem;margin-top:0.6rem;}
+.stag{font-size:9px;padding:0.15rem 0.4rem;border:1px solid var(--border);color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;}
+
+/* PROJECTS */
+#projects{border-bottom:1px solid var(--border);}
+.projects-header{padding:2.5rem 2.5rem 1.5rem;}
+.project-item{
+  display:grid;grid-template-columns:auto 1fr auto;
+  gap:1.5rem;align-items:center;
+  padding:1.25rem 2.5rem;
+  border-top:1px solid var(--border);
+  background:var(--surface);
+  transition:background 0.2s;cursor:pointer;
+}
+.project-item:hover{background:var(--surface2);}
+.project-num{font-size:10px;color:var(--accent);letter-spacing:0.15em;min-width:28px;}
+.project-body{}
+.project-name{font-family:var(--display);font-size:1rem;font-weight:700;color:var(--text);margin-bottom:0.2rem;}
+.project-desc{font-size:11px;color:var(--muted);line-height:1.7;}
+.project-tags{display:flex;gap:0.35rem;flex-wrap:wrap;margin-top:0.5rem;}
+.ptag{font-size:9px;padding:0.12rem 0.4rem;background:rgba(200,240,77,0.07);border:1px solid rgba(200,240,77,0.18);color:var(--accent);text-transform:uppercase;letter-spacing:0.04em;}
+.project-arrow{font-size:1.1rem;color:var(--muted);transition:color 0.2s,transform 0.2s;}
+.project-item:hover .project-arrow{color:var(--accent);transform:translate(3px,-3px);}
+.dim{opacity:0.4;}
+
+/* CONTACT */
+#contact{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border);}
+.contact-left{padding:3rem 2.5rem;border-right:1px solid var(--border);}
+.contact-right{padding:3rem 2.5rem;}
+.contact-blurb{font-size:12px;color:var(--muted);line-height:1.95;margin-bottom:1.5rem;}
+.contact-links{display:flex;flex-direction:column;gap:0.5rem;}
+.clink{display:flex;align-items:center;gap:0.75rem;color:var(--muted);text-decoration:none;font-size:11px;letter-spacing:0.04em;padding:0.65rem 0.9rem;border:1px solid var(--border);transition:all 0.2s;}
+.clink:hover{border-color:var(--accent);color:var(--accent);}
+.clink-icon{color:var(--accent);min-width:16px;}
+.form{display:flex;flex-direction:column;gap:0.65rem;}
+.flabel{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.25rem;}
+.finput{
+  background:var(--surface);border:1px solid var(--border);
+  color:var(--text);padding:0.6rem 0.85rem;
+  font-family:var(--mono);font-size:12px;
+  outline:none;transition:border-color 0.2s;
+  resize:vertical;width:100%;
+}
+.finput:focus{border-color:var(--accent);}
+.finput::placeholder{color:var(--muted);}
+
+/* FOOTER */
+footer{
+  padding:1.25rem 2.5rem;
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:10px;color:var(--muted);letter-spacing:0.05em;
+}
+
+@media(max-width:700px){
+  nav{padding:0.85rem 1.25rem;}
+  .hero{padding:5.5rem 1.25rem 0;}
+  .hero-inner{grid-template-columns:1fr;}
+  .hero-deco{display:none;}
+  #about,#contact{grid-template-columns:1fr;}
+  .about-left,.contact-left{border-right:none;border-bottom:1px solid var(--border);}
+  .about-left,.about-right,.contact-left,.contact-right{padding:2rem 1.25rem;}
+  .skills-header,.projects-header{padding:2rem 1.25rem 1rem;}
+  .skills-grid{grid-template-columns:1fr 1fr;}
+  .project-item{padding:1rem 1.25rem;grid-template-columns:auto 1fr auto;}
+  footer{flex-direction:column;gap:0.4rem;text-align:center;padding:1rem 1.25rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">⟨ Motasim /⟩</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Work</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="status-badge"><span class="status-dot"></span>Open to learn &amp; collaborate</div>
+      <p class="hero-eyebrow">High School Developer · Pakistan</p>
+      <h1 class="hero-name">Muhammad<br><span>Motasim.</span></h1>
+      <p class="hero-role">I code. I create. I explore.</p>
+      <p class="hero-desc">High school student obsessed with computers, coding, and all things tech. I turn curiosity into real software — one project at a time.</p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">See my work →</a>
+        <a href="#contact" class="btn btn-outline">Get in touch</a>
+      </div>
+    </div>
+    <div class="hero-deco">M.</div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="accent">◆</span><span>Web Development</span>
+    <span class="accent">◆</span><span>Python</span>
+    <span class="accent">◆</span><span>JavaScript</span>
+    <span class="accent">◆</span><span>Creative Coding</span>
+    <span class="accent">◆</span><span>Problem Solving</span>
+    <span class="accent">◆</span><span>Always Learning</span>
+    <span class="accent">◆</span><span>Open Source</span>
+    <span class="accent">◆</span><span>Pakistan 🇵🇰</span>
+    <span class="accent">◆</span><span>Web Development</span>
+    <span class="accent">◆</span><span>Python</span>
+    <span class="accent">◆</span><span>JavaScript</span>
+    <span class="accent">◆</span><span>Creative Coding</span>
+    <span class="accent">◆</span><span>Problem Solving</span>
+    <span class="accent">◆</span><span>Always Learning</span>
+    <span class="accent">◆</span><span>Open Source</span>
+    <span class="accent">◆</span><span>Pakistan 🇵🇰</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div id="about">
+  <div class="about-left">
+    <p class="section-label">// 01 — About</p>
+    <h2 class="section-title">Who I am</h2>
+    <div class="about-text">
+      <p>Hey! I'm Muhammad Motasim — a high school student from Pakistan with a deep passion for computers and coding. What started as curiosity about how things work on a screen turned into a serious drive to build them myself.</p>
+      <p>I spend my time learning programming, experimenting with projects, and exploring everything from web development to AI. I believe age is no barrier to building real things.</p>
+      <p>Gaming got me into tech — now tech is what I live for. Always looking to learn, collaborate, and grow.</p>
+    </div>
+    <div class="stat-row">
+      <div class="stat-box"><span class="stat-num">∞</span><div class="stat-lbl">Curiosity</div></div>
+      <div class="stat-box"><span class="stat-num">100%</span><div class="stat-lbl">Self-taught</div></div>
+      <div class="stat-box"><span class="stat-num">24/7</span><div class="stat-lbl">Learning mode</div></div>
+      <div class="stat-box"><span class="stat-num">PK</span><div class="stat-lbl">Pakistan</div></div>
+    </div>
+  </div>
+  <div class="about-right">
+    <p class="section-label">// Interests</p>
+    <h2 class="section-title">What drives me</h2>
+    <div class="interest-list">
+      <div class="interest-item"><span class="interest-icon">💻</span> Computers &amp; Hardware <span class="interest-sub">How things work</span></div>
+      <div class="interest-item"><span class="interest-icon">⌨️</span> Coding &amp; Building <span class="interest-sub">My main passion</span></div>
+      <div class="interest-item"><span class="interest-icon">🌐</span> Web Development <span class="interest-sub">Frontend &amp; Backend</span></div>
+      <div class="interest-item"><span class="interest-icon">🤖</span> Artificial Intelligence <span class="interest-sub">Exploring AI/ML</span></div>
+      <div class="interest-item"><span class="interest-icon">🎮</span> Gaming <span class="interest-sub">Where it all started</span></div>
+      <div class="interest-item"><span class="interest-icon">🔓</span> Open Source <span class="interest-sub">Community &amp; code</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<div id="skills">
+  <div class="skills-header">
+    <p class="section-label">// 02 — Skills</p>
+    <h2 class="section-title">What I work with</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon">🌐</div>
+      <div class="skill-name">Web Dev</div>
+      <p class="skill-desc">Building websites from structure to style to interactivity.</p>
+      <div class="skill-tags">
+        <span class="stag">HTML</span><span class="stag">CSS</span><span class="stag">JavaScript</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">⌨️</div>
+      <div class="skill-name">Programming</div>
+      <p class="skill-desc">Writing logic, solving problems, making computers do things.</p>
+      <div class="skill-tags">
+        <span class="stag">Python</span><span class="stag">C++</span><span class="stag">Logic</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🎮</div>
+      <div class="skill-name">Gaming &amp; Tech</div>
+      <p class="skill-desc">Gaming gave me a love for how complex systems are designed.</p>
+      <div class="skill-tags">
+        <span class="stag">PC</span><span class="stag">Hardware</span><span class="stag">Optimization</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🔍</div>
+      <div class="skill-name">Exploring</div>
+      <p class="skill-desc">Always diving into new territory — AI, Linux, open source.</p>
+      <div class="skill-tags">
+        <span class="stag">AI</span><span class="stag">Linux</span><span class="stag">Open Source</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<div id="projects">
+  <div class="projects-header">
+    <p class="section-label">// 03 — Projects</p>
+    <h2 class="section-title">Things I've built</h2>
+  </div>
+  <div class="project-item">
+    <div class="project-num">001</div>
+    <div class="project-body">
+      <div class="project-name">Personal Portfolio Website</div>
+      <div class="project-desc">This very site — designed and coded from scratch with a dark, sleek aesthetic that reflects my developer personality.</div>
+      <div class="project-tags"><span class="ptag">HTML</span><span class="ptag">CSS</span><span class="ptag">JavaScript</span></div>
+    </div>
+    <div class="project-arrow">↗</div>
+  </div>
+  <div class="project-item dim">
+    <div class="project-num">002</div>
+    <div class="project-body">
+      <div class="project-name">Next Project — Coming Soon</div>
+      <div class="project-desc">Currently learning and building. Check back soon — something's in the works.</div>
+      <div class="project-tags"><span class="ptag">TBD</span></div>
+    </div>
+    <div class="project-arrow">—</div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div id="contact">
+  <div class="contact-left">
+    <p class="section-label">// 04 — Contact</p>
+    <h2 class="section-title">Say hello</h2>
+    <p class="contact-blurb">I'm always happy to connect — whether it's about a project idea, tech talk, a collab, or just a friendly hello. Don't hesitate to reach out!</p>
+    <div class="contact-links">
+      <a href="mailto:mastergamer9578@gmail.com" class="clink">
+        <span class="clink-icon">✉</span> mastergamer9578@gmail.com
+      </a>
+      <a href="https://www.instagram.com/motasim._.9559" target="_blank" class="clink">
+        <span class="clink-icon">◈</span> @motasim._.9559 on Instagram
+      </a>
+    </div>
+  </div>
+  <div class="contact-right">
+    <p class="section-label">// Send a message</p>
+    <h2 class="section-title">Drop me a line</h2>
+    <div class="form">
+      <div>
+        <label class="flabel">Your Name</label>
+        <input class="finput" type="text" placeholder="Your name"/>
+      </div>
+      <div>
+        <label class="flabel">Your Email</label>
+        <input class="finput" type="email" placeholder="your@email.com"/>
+      </div>
+      <div>
+        <label class="flabel">Message</label>
+        <textarea class="finput" rows="4" placeholder="What's on your mind?"></textarea>
+      </div>
+      <button class="btn btn-primary" style="align-self:flex-start;" onclick="alert('Thanks! (Connect a backend to make this work 🚀)')">Send message →</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>© 2026 Muhammad Motasim. Built with passion.</span>
+  <span style="color:var(--accent);">⟨ / ⟩</span>
+</footer>
+
+</body>
+</html>
