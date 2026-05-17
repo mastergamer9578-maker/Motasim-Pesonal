@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="icon" type="image/png" href="/logo.png">
+<link rel="icon" type="image/png" href="logo.png">
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Muhammad Motasim — Developer</title>
@@ -381,8 +381,10 @@ function cm(){mm.classList.remove('open');}
 // SEND BTN
 document.getElementById('sendbtn').onclick=()=>{
   const n=document.getElementById('fname').value.trim();
-  if(!n){alert('Please enter your name!');return;}
-  alert('Thanks! 🚀\nTip:Mail To mastergamer9578@gmail.com.');
+  let msg=document.getElementById('form-msg');
+  if(!msg){msg=document.createElement('p');msg.id='form-msg';msg.style.cssText='font-size:11px;margin-top:.6rem;padding:.5rem .85rem;border:1px solid;width:fit-content;font-family:var(--mono);';document.getElementById('sendbtn').insertAdjacentElement('afterend',msg);}
+  if(!n){msg.textContent='⚠ Please enter your name and email.';msg.style.color='#f07';msg.style.borderColor='rgba(255,0,119,.3)';msg.style.background='rgba(255,0,119,.06)';return;}
+  msg.textContent='Thanks! 🚀 Tip: Mail to mastergamer9578@gmail.com';msg.style.color='var(--accent)';msg.style.borderColor='rgba(200,240,77,.3)';msg.style.background='rgba(200,240,77,.06)';
 };
 </script>
 <span class="footer-copy" style="display:block;text-align:center;padding:0.5rem 0 1.5rem;background:var(--obsidian);font-size:0.6rem;letter-spacing:0.12em;color:var(--cream-faint);">Created By Muhammad Motasim</span>
