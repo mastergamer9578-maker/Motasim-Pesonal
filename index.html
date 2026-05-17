@@ -691,8 +691,8 @@ footer span:last-child{color:var(--accent);font-family:var(--mono);}
     <h2 class="sec-h2 r d2">Drop Me a Line</h2>
     <div class="form r d3">
       <div><label class="fl">Your Name</label><input class="fi" id="fname" type="text" placeholder="Your name"/></div>
-      <div><label class="fl">Your Email</label><input class="fi" type="email" placeholder="your@email.com"/></div>
-      <div><label class="fl">Message</label><textarea class="fi" rows="4" placeholder="What's on your mind?"></textarea></div>
+      <div><label class="fl">Your Email</label><input class="fi" id="femail" type="email" placeholder="your@email.com"/></div>
+      <div><label class="fl">Message</label><textarea class="fi" id="fmessage" rows="4" placeholder="What's on your mind?"></textarea></div>
       <button class="btn bp" id="sendbtn" style="align-self:flex-start;cursor:pointer;">Send Message →</button>
     </div>
   </div>
@@ -731,17 +731,40 @@ function cm(){mm.classList.remove('open');}
 // SEND BTN
 document.getElementById('sendbtn').onclick=()=>{
   const n=document.getElementById('fname').value.trim();
+  const e=document.getElementById('femail').value.trim();
+  const m=document.getElementById('fmessage').value.trim();
   let msg=document.getElementById('form-msg');
   if(!msg){
     msg=document.createElement('p');msg.id='form-msg';
     msg.style.cssText='font-size:12px;margin-top:.6rem;padding:.6rem 1rem;border:1px solid;width:fit-content;font-family:var(--mono);border-radius:2px;';
     document.getElementById('sendbtn').insertAdjacentElement('afterend',msg);
   }
+  // Validate Name
   if(!n){
     msg.textContent='⚠ Please enter your name.';
     msg.style.color='#ff6b6b';msg.style.borderColor='rgba(255,107,107,.3)';msg.style.background='rgba(255,107,107,.06)';
     return;
   }
+  // Validate Email
+  if(!e){
+    msg.textContent='⚠ Please enter your email.';
+    msg.style.color='#ff6b6b';msg.style.borderColor='rgba(255,107,107,.3)';msg.style.background='rgba(255,107,107,.06)';
+    return;
+  }
+  // Validate Email format
+  const emailRegex=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if(!emailRegex.test(e)){
+    msg.textContent='⚠ Please enter a valid email address.';
+    msg.style.color='#ff6b6b';msg.style.borderColor='rgba(255,107,107,.3)';msg.style.background='rgba(255,107,107,.06)';
+    return;
+  }
+  // Validate Message
+  if(!m){
+    msg.textContent='⚠ Please enter a message.';
+    msg.style.color='#ff6b6b';msg.style.borderColor='rgba(255,107,107,.3)';msg.style.background='rgba(255,107,107,.06)';
+    return;
+  }
+  // All fields valid
   msg.textContent='Thanks! 🚀 Tip: Mail to mastergamer9578@gmail.com';
   msg.style.color='var(--accent)';msg.style.borderColor='rgba(0,245,196,.3)';msg.style.background='rgba(0,245,196,.06)';
 };
