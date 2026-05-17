@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="icon" type="image/png" href="logo.png">
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Muhammad Motasim — Developer</title>
@@ -42,12 +41,30 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .burger span{display:block;width:22px;height:1.5px;background:var(--muted);transition:all .3s;}
 
 /* MOBILE MENU */
-.mmenu{display:none;position:fixed;inset:0;background:rgba(10,10,12,.97);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:2rem;backdrop-filter:blur(20px);}
-.mmenu.open{display:flex;animation:mopen .3s ease both;}
-@keyframes mopen{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:none}}
-.mmenu a{font-family:var(--display);font-size:2.2rem;font-weight:800;color:var(--muted);text-decoration:none;letter-spacing:-.03em;transition:color .2s;}
-.mmenu a:hover{color:var(--accent);}
-.mclose{position:absolute;top:1.5rem;right:2rem;font-size:1.5rem;color:var(--muted);background:none;border:none;cursor:pointer;font-family:var(--mono);}
+.mmenu{display:none;position:fixed;inset:0;background:rgba(10,10,12,.97);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:.9rem;backdrop-filter:blur(24px);}
+.mmenu.open{display:flex;}
+.mmenu.open .mlink{animation:mslide .42s cubic-bezier(.22,1,.36,1) both;}
+.mmenu.open .mlink:nth-child(2){animation-delay:.06s;}
+.mmenu.open .mlink:nth-child(3){animation-delay:.13s;}
+.mmenu.open .mlink:nth-child(4){animation-delay:.20s;}
+.mmenu.open .mlink:nth-child(5){animation-delay:.27s;}
+.mmenu.open .mmenu-line{animation:mfade .4s ease both;}
+.mmenu.open .mmenu-line:nth-of-type(1){animation-delay:.09s;}
+.mmenu.open .mmenu-line:nth-of-type(2){animation-delay:.16s;}
+.mmenu.open .mmenu-line:nth-of-type(3){animation-delay:.23s;}
+@keyframes mslide{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:none}}
+@keyframes mfade{from{opacity:0;transform:scaleX(0)}to{opacity:1;transform:scaleX(1)}}
+.mmenu-glow{position:absolute;width:300px;height:300px;background:radial-gradient(circle,rgba(200,240,77,.06),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
+.mmenu-num{font-size:9px;color:var(--accent);letter-spacing:.18em;font-family:var(--mono);margin-bottom:.1rem;display:block;}
+.mlink{display:flex;flex-direction:column;align-items:flex-start;padding:.6rem 1.3rem;border:1px solid transparent;min-width:210px;text-decoration:none;transition:border-color .22s,background .22s,transform .22s;}
+.mlink:hover{border-color:var(--border);background:var(--surface);transform:translateX(7px);}
+.mlink .mtxt{font-family:var(--display);font-size:1.2rem;font-weight:800;color:var(--muted);letter-spacing:-.02em;transition:color .22s;display:flex;align-items:center;gap:.5rem;}
+.mlink:hover .mtxt{color:var(--accent);}
+.mlink .mtxt::after{content:'→';font-size:.85rem;opacity:0;transform:translateX(-8px);transition:opacity .22s,transform .22s;}
+.mlink:hover .mtxt::after{opacity:1;transform:translateX(0);}
+.mmenu-line{width:210px;height:1px;background:var(--border);transform-origin:left;}
+.mclose{position:absolute;top:1.25rem;right:1.5rem;font-size:10px;color:var(--muted);background:var(--surface);border:1px solid var(--border);cursor:pointer;font-family:var(--mono);padding:.35rem .7rem;letter-spacing:.12em;text-transform:uppercase;transition:color .2s,border-color .2s;}
+.mclose:hover{color:var(--accent);border-color:var(--accent);}
 
 /* HERO */
 .hero{padding:6.5rem 2.5rem 0;position:relative;overflow:hidden;border-bottom:1px solid var(--border);}
@@ -184,11 +201,15 @@ footer{padding:1.25rem 2.5rem;display:flex;justify-content:space-between;align-i
 
 <!-- MOBILE MENU -->
 <div class="mmenu" id="mm">
-  <button class="mclose" id="mc">✕</button>
-  <a href="#about" onclick="cm()">About</a>
-  <a href="#skills" onclick="cm()">Skills</a>
-  <a href="#projects" onclick="cm()">Work</a>
-  <a href="#contact" onclick="cm()">Contact</a>
+  <div class="mmenu-glow"></div>
+  <button class="mclose" id="mc">✕ close</button>
+  <a href="#about" class="mlink" onclick="cm()"><span class="mmenu-num">01</span><span class="mtxt">About</span></a>
+  <div class="mmenu-line"></div>
+  <a href="#skills" class="mlink" onclick="cm()"><span class="mmenu-num">02</span><span class="mtxt">Skills</span></a>
+  <div class="mmenu-line"></div>
+  <a href="#projects" class="mlink" onclick="cm()"><span class="mmenu-num">03</span><span class="mtxt">Work</span></a>
+  <div class="mmenu-line"></div>
+  <a href="#contact" class="mlink" onclick="cm()"><span class="mmenu-num">04</span><span class="mtxt">Contact</span></a>
 </div>
 
 <!-- NAV -->
@@ -291,11 +312,11 @@ footer{padding:1.25rem 2.5rem;display:flex;justify-content:space-between;align-i
     <p class="slabel r">// 03 — Projects</p>
     <h2 class="r d1">Things I've built</h2>
   </div>
-  <div class="pi r d2">
+  <a href="https://n8n-pro-web.vercel.app" target="_blank" class="pi r d2" style="text-decoration:none;color:inherit;">
     <div class="pn">001</div>
     <div><div class="pt">Personal Portfolio Website</div><div class="pd">This very site — designed and coded from scratch with a dark, sleek aesthetic.</div><div class="ptags"><span class="ptag">HTML</span><span class="ptag">CSS</span><span class="ptag">JavaScript</span></div></div>
     <div class="pa">↗</div>
-  </div>
+  </a>
   <div class="pi dim r d3">
     <div class="pn">002</div>
     <div><div class="pt">Next Project — Coming Soon</div><div class="pd">Currently learning and building. Check back soon — something's in the works.</div><div class="ptags"><span class="ptag">TBD</span></div></div>
