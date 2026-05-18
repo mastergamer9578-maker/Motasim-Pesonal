@@ -83,11 +83,40 @@ nav{
 }
 .nav-cta:hover{background:#00e8b8;transform:translateY(-1px);}
 .burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;}
-.burger span{display:block;width:22px;height:1.5px;background:var(--muted2);transition:all .3s;}
+.burger span{display:block;width:22px;height:1.5px;background:var(--muted2);transition:transform .35s cubic-bezier(.22,1,.36,1), opacity .25s, background .2s;}
+/* Burger → X animation */
+.burger.active span:nth-child(1){transform:translateY(6.5px) rotate(45deg);background:var(--accent);}
+.burger.active span:nth-child(2){opacity:0;transform:scaleX(0);}
+.burger.active span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);background:var(--accent);}
 
 /* ── MOBILE MENU ── */
-.mmenu{display:none;position:fixed;inset:0;background:rgba(4,5,10,0.97);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:0;backdrop-filter:blur(30px);}
-.mmenu.open{display:flex;}
+.mmenu{
+  display:flex;
+  position:fixed;inset:0;background:rgba(4,5,10,0.97);z-index:200;
+  flex-direction:column;align-items:center;justify-content:center;gap:0;
+  backdrop-filter:blur(30px);
+  /* Hidden state */
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(-12px);
+  transition:opacity .35s cubic-bezier(.22,1,.36,1), transform .35s cubic-bezier(.22,1,.36,1);
+}
+.mmenu.open{
+  opacity:1;
+  pointer-events:all;
+  transform:translateY(0);
+}
+/* Stagger menu links on open */
+.mmenu .mlink{
+  opacity:0;
+  transform:translateY(16px);
+  transition:opacity .3s cubic-bezier(.22,1,.36,1), transform .3s cubic-bezier(.22,1,.36,1), background .22s, padding .22s;
+}
+.mmenu.open .mlink:nth-child(2){opacity:1;transform:none;transition-delay:.07s;}
+.mmenu.open .mlink:nth-child(3){opacity:1;transform:none;transition-delay:.13s;}
+.mmenu.open .mlink:nth-child(4){opacity:1;transform:none;transition-delay:.19s;}
+.mmenu.open .mlink:nth-child(5){opacity:1;transform:none;transition-delay:.25s;}
+.mmenu.open .mlink:nth-child(6){opacity:1;transform:none;transition-delay:.31s;}
 .mmenu-glow{position:absolute;width:400px;height:400px;background:radial-gradient(circle,rgba(0,245,196,.05),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
 .mmenu-num{font-size:9px;color:var(--accent);letter-spacing:.2em;font-family:var(--mono);margin-bottom:.2rem;display:block;}
 .mlink{
@@ -724,9 +753,12 @@ document.querySelectorAll('.r').forEach(el=>obs.observe(el));
 
 // MOBILE MENU
 const mm=document.getElementById('mm');
-document.getElementById('bg').onclick=()=>mm.classList.add('open');
-document.getElementById('mc').onclick=()=>mm.classList.remove('open');
-function cm(){mm.classList.remove('open');}
+const bg=document.getElementById('bg');
+function openMenu(){mm.classList.add('open');bg.classList.add('active');}
+function closeMenu(){mm.classList.remove('open');bg.classList.remove('active');}
+bg.onclick=openMenu;
+document.getElementById('mc').onclick=closeMenu;
+function cm(){closeMenu();}
 
 // SEND BTN
 document.getElementById('sendbtn').onclick=()=>{
