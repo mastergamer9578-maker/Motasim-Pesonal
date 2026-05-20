@@ -148,6 +148,30 @@ nav{
 .mmenu-num{font-size:9px;color:var(--cyan);letter-spacing:.2em;font-family:var(--mono);margin-bottom:.2rem;display:block;}
 .mtxt{font-family:var(--display);font-size:2.2rem;font-weight:700;color:var(--muted2);transition:color .22s;}
 .mlink:hover .mtxt{color:var(--cyan);}
+.mmenu-cta-wrap{
+  min-width:260px;padding:1.6rem 1.8rem 0;
+  opacity:0;transform:translateY(20px);
+  transition:all .3s cubic-bezier(.22,1,.36,1);
+}
+.mmenu.open .mmenu-cta-wrap{opacity:1;transform:translateY(0);transition-delay:.36s;}
+.mmenu-cta{
+  display:block;text-align:center;text-decoration:none;
+  padding:.85rem 1.5rem;
+  background:linear-gradient(135deg,var(--cyan),var(--purple));
+  color:#020408;font-family:var(--body);font-size:13px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;
+  border-radius:6px;
+  box-shadow:0 0 28px rgba(0,245,196,0.25),0 4px 16px rgba(0,0,0,0.3);
+  transition:all .3s;position:relative;overflow:hidden;
+}
+.mmenu-cta::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--purple),var(--pink));
+  opacity:0;transition:opacity .3s;
+}
+.mmenu-cta span{position:relative;z-index:1;}
+.mmenu-cta:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,245,196,0.35);}
+.mmenu-cta:hover::before{opacity:1;}
 .mclose{
   position:absolute;top:1.5rem;right:2rem;
   font-size:11px;color:var(--muted);background:var(--glass);
@@ -622,6 +646,9 @@ footer span:last-child{color:var(--cyan);font-family:var(--mono);}
   <a href="#skills" class="mlink" onclick="cm()"><span class="mmenu-num">02</span><span class="mtxt">Skills</span></a>
   <a href="#projects" class="mlink" onclick="cm()"><span class="mmenu-num">03</span><span class="mtxt">Work</span></a>
   <a href="#contact" class="mlink" onclick="cm()"><span class="mmenu-num">04</span><span class="mtxt">Contact</span></a>
+  <div class="mmenu-cta-wrap">
+    <a href="#contact" class="mmenu-cta" onclick="cm()"><span>Contact</span></a>
+  </div>
 </div>
 
 <!-- NAV -->
