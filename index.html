@@ -4,7 +4,7 @@
 <link rel="icon" type="image/png" href="logo.png">
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Muhammad Motasim — Developer</title>
+<title>Muhammad Motasim — Desingner</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <style>
@@ -41,7 +41,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--body);overflow-x:h
   pointer-events:none;z-index:9999;
   will-change:transform;
   box-shadow:0 0 10px var(--cyan),0 0 22px rgba(0,245,196,0.35);
-  /* NO transition on transform — dot must be pixel-perfect instantly */
   transition:background .18s,box-shadow .18s,opacity .18s;
 }
 #cur-ring{
@@ -50,7 +49,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--body);overflow-x:h
   border:1px solid rgba(0,245,196,0.45);border-radius:50%;
   pointer-events:none;z-index:9998;
   will-change:transform;
-  /* Ring trails intentionally via JS lerp — no CSS transform transition */
   transition:border-color .3s,opacity .3s;
 }
 #cur-trail{
@@ -194,10 +192,9 @@ nav{
   display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;
   z-index:1;
 }
-/* 3D floating badge */
 .badge{
   display:inline-flex;align-items:center;gap:.6rem;
-  padding:.4rem 1rem;border-radius:999px;
+  padding:.4rem 1rem;border-radius999px;
   border:1px solid rgba(0,245,196,0.25);
   background:rgba(0,245,196,0.06);
   backdrop-filter:blur(10px);
@@ -301,7 +298,6 @@ h1 .outline{
   background:linear-gradient(135deg,rgba(0,245,196,0.04),rgba(167,139,250,0.04));
   pointer-events:none;
 }
-/* Glowing top edge */
 .hcard-glow{
   position:absolute;top:0;left:20px;right:20px;height:1px;
   background:linear-gradient(90deg,transparent,var(--cyan),var(--purple),transparent);
@@ -323,7 +319,6 @@ h1 .outline{
   vertical-align:middle;animation:blink .9s step-end infinite;margin-left:2px;
 }
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
-/* 3D depth layer behind card */
 .hcard-shadow{
   position:absolute;inset:8px;background:rgba(0,245,196,0.03);
   border-radius:16px;transform:translateZ(-20px);
@@ -372,7 +367,6 @@ section{position:relative;z-index:1;}
 .atext p+p{margin-top:1rem;}
 .atext strong{color:var(--cyan);font-weight:600;}
 
-/* Stats — 3D glass cards */
 .stats{
   display:grid;grid-template-columns:repeat(4,1fr);
   gap:1px;background:var(--border);border-radius:12px;overflow:hidden;
@@ -398,7 +392,6 @@ section{position:relative;z-index:1;}
 }
 .slbl{font-size:9px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-top:.35rem;line-height:1.3;}
 
-/* Interest list */
 .ilist{display:flex;flex-direction:column;gap:.5rem;margin-top:1.5rem;}
 .iitem{
   display:flex;align-items:center;gap:.9rem;
@@ -548,11 +541,18 @@ footer span:last-child{color:var(--cyan);font-family:var(--mono);}
 .bp:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 16px 45px rgba(0,245,196,0.3);}
 .bo:hover{border-color:var(--cyan);color:var(--cyan);transform:translateY(-4px) scale(1.03);box-shadow:0 0 28px rgba(0,245,196,0.12);}
 
-/* ── SMOOTH PARTICLE FADE IN ── */
 @keyframes particleFadeIn{from{opacity:0}to{opacity:1}}
 #bg-canvas{animation:particleFadeIn 1.5s ease both;}
+
+/* ── RESPONSIVE & UTILITIES ── */
+@media(max-width:1100px){
+  .sgrid{grid-template-columns:1fr 1fr;}
+  .hero-inner{gap:2.5rem;}
+  .hcard{max-width:280px;}
+}
+
+/* Base structural adjustments for narrow screens */
 @media(max-width:768px){
-  /* Kill expensive backdrop-filter on mobile */
   nav,
   .mmenu,
   .ticker,
@@ -562,29 +562,18 @@ footer span:last-child{color:var(--cyan);font-family:var(--mono);}
   .clink,
   .fi,
   .bo{backdrop-filter:none !important;-webkit-backdrop-filter:none !important;}
-  /* Disable heavy box-shadows on mobile */
   .hcard{box-shadow:0 10px 40px rgba(0,0,0,0.6);}
   .sc:hover{box-shadow:none;}
-  /* Disable float3d animation on mobile */
   .hcard-wrap{animation:none !important;}
-  /* Reduce CSS transition cost */
   .iitem,.sc,.sbox,.clink,.pi{transition:background .2s,border-color .2s;}
-}
 
-/* ── RESPONSIVE ── */
-@media(max-width:1100px){
-  .sgrid{grid-template-columns:1fr 1fr;}
-  .hero-inner{gap:2.5rem;}
-  .hcard{max-width:280px;}
-}
-@media(max-width:768px){
   body{cursor:auto;}
   *{cursor:auto !important;}
   a,button,.btn,.pi,.clink{cursor:pointer !important;}
-  #cur,#cur-ring{display:none;}
+  #cur,#cur-ring,#cur-trail{display:none !important;}
   nav{padding:.9rem 1.5rem;}
-  .nav-links,.nav-cta{display:none;}
-  .burger{display:flex;}
+  
+  /* Layout shifts */
   .hero{padding:0 1.5rem;}
   .hero-inner{grid-template-columns:1fr;padding-top:7rem;padding-bottom:4rem;}
   .hero-right{display:none;}
@@ -601,6 +590,20 @@ footer span:last-child{color:var(--cyan);font-family:var(--mono);}
   footer{flex-direction:column;gap:.5rem;text-align:center;padding:1.25rem 1.5rem;}
   .stats{grid-template-columns:1fr 1fr;}
 }
+
+/* ── STRICT DEVICE CATEGORIZATION ── */
+/* Laptop & Desktop (Non-touch screens): Force menu items to show, completely hide mobile burger assets */
+body:not(.touch-screen-active) .nav-links { display: flex !important; }
+body:not(.touch-screen-active) .burger { display: none !important; }
+body:not(.touch-screen-active) .mmenu { display: none !important; }
+
+/* Mobile & Tablet (Actual hardware touch screens below break point): Apply mobile styling override */
+@media(max-width:768px) {
+  body.touch-screen-active .nav-links, 
+  body.touch-screen-active .nav-cta { display: none !important; }
+  body.touch-screen-active .burger { display: flex !important; }
+}
+
 @media(max-width:480px){
   .sgrid{grid-template-columns:1fr;}
   .cta{flex-direction:column;}
@@ -639,7 +642,6 @@ footer span:last-child{color:var(--cyan);font-family:var(--mono);}
 <div id="cur-ring"></div>
 <div id="cur-trail"></div>
 
-<!-- MOBILE MENU -->
 <div class="mmenu" id="mm">
   <div class="mmenu-glow"></div>
   <button class="mclose" id="mc">✕ close</button>
@@ -652,7 +654,6 @@ footer span:last-child{color:var(--cyan);font-family:var(--mono);}
   </div>
 </div>
 
-<!-- NAV -->
 <nav>
   <a href="#" class="logo"><div class="logo-gem"></div>MOTASIM</a>
   <div class="nav-links">
@@ -665,7 +666,6 @@ footer span:last-child{color:var(--cyan);font-family:var(--mono);}
   <button class="burger" id="bg" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-left">
@@ -674,8 +674,8 @@ footer span:last-child{color:var(--cyan);font-family:var(--mono);}
         <span class="grad">MUHAMMAD</span><br>
         <span class="outline">MOTASIM</span>
       </h1>
-      <p class="role">// High School <span class="hl">Developer</span> · Pakistan 🇵🇰</p>
-      <p class="hdesc">High school student obsessed with computers, coding, and all things tech. I turn curiosity into real software — one project at a time.</p>
+      <p class="role">// High School <span class="hl">Designer</span> · Pakistan 🇵🇰</p>
+      <p class="hdesc">High school student obsessed with computers, UI/UX Desingning, and all things tech. I turn curiosity into real software — one project at a time.</p>
       <div class="cta">
         <a href="#projects" class="btn bp"><span>See My Work →</span></a>
         <a href="#contact" class="btn bo">Get In Touch</a>
@@ -700,8 +700,8 @@ footer span:last-child{color:var(--cyan);font-family:var(--mono);}
             <div>&nbsp;&nbsp;<span class="v">role</span>: <span class="s">"Developer"</span>,</div>
             <div>&nbsp;&nbsp;<span class="v">location</span>: <span class="s">"Pakistan 🇵🇰"</span>,</div>
             <div>&nbsp;&nbsp;<span class="v">hafiz</span>: <span class="k">true</span>,</div>
-            <div>&nbsp;&nbsp;<span class="v">stack</span>: [<span class="s">"HTML"</span>, <span class="s">"CSS"</span>,</div>
-            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s">"JS"</span>, <span class="s">"Python"</span>],</div>
+            <div>&nbsp;&nbsp;<span class="v">stack</span>: [<span class="s">"UI"</span>, <span class="s">"UX"</span>,</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s">"Desingner"</span>],</div>
             <div>&nbsp;&nbsp;<span class="v">passion</span>: <span class="s">"Building things"</span></div>
             <div>};<span class="hcard-cursor"></span></div>
           </div>
@@ -711,7 +711,6 @@ footer span:last-child{color:var(--cyan);font-family:var(--mono);}
   </div>
 </section>
 
-<!-- TICKER -->
 <div class="ticker">
   <div class="ticker-track">
     <div class="ti"><span class="ts ts-c">◆</span><span>Hafiz e Quran</span></div>
@@ -725,7 +724,6 @@ footer span:last-child{color:var(--cyan);font-family:var(--mono);}
     <div class="ti"><span class="ts ts-pk">◆</span><span>Pakistan 🇵🇰</span></div>
     <div class="ti"><span class="ts ts-c">◆</span><span>High Schooler</span></div>
     <div class="ti"><span class="ts ts-p">◆</span><span>AI &amp; ML</span></div>
-    <!-- duplicate -->
     <div class="ti"><span class="ts ts-c">◆</span><span>Hafiz e Quran</span></div>
     <div class="ti"><span class="ts ts-p">◆</span><span>Web Development</span></div>
     <div class="ti"><span class="ts ts-pk">◆</span><span>Python</span></div>
@@ -740,14 +738,13 @@ footer span:last-child{color:var(--cyan);font-family:var(--mono);}
   </div>
 </div>
 
-<!-- ABOUT -->
 <section id="about">
   <div class="al">
     <p class="sec-label r d1">01 — About</p>
     <h2 class="sec-h2 r d2">Who I Am</h2>
     <div class="atext r d3">
-      <p>Hey! I'm Muhammad Motasim — a high school student from Pakistan with a deep passion for computers and coding. What started as curiosity about how things work on a screen turned into a serious drive to build them myself.</p>
-      <p>I'm also a <strong>Hafiz e Quran</strong> — I have memorized the entire Holy Quran. It's taught me discipline, focus, and the power of dedication — values that carry into everything I do, including coding.</p>
+      <p>Hey! I'm Muhammad Motasim — a high school student from Pakistan with a deep passion for computers and designing. What started as curiosity about how things work on a screen turned into a serious drive to build them myself.</p>
+      <p>I'm also a <strong>Hafiz e Quran</strong> — I have memorized the entire Holy Quran. It's taught me discipline, focus, and the power of dedication — values that carry into everything I do, including UI/UX Designing.</p>
       <p>Gaming got me into tech — now tech is what I live for. Always looking to learn, collaborate, and grow.</p>
     </div>
     <div class="stats r d4">
@@ -763,8 +760,8 @@ footer span:last-child{color:var(--cyan);font-family:var(--mono);}
     <div class="ilist">
       <div class="iitem r d2">📖 Hafiz e Quran<span class="isub">Full Quran memorized</span></div>
       <div class="iitem r d2">💻 Computers &amp; Hardware<span class="isub">How things work</span></div>
-      <div class="iitem r d3">⌨️ Coding &amp; Building<span class="isub">My main passion</span></div>
-      <div class="iitem r d3">🌐 Web Development<span class="isub">Frontend &amp; Backend</span></div>
+      <div class="iitem r d3">⌨️ UI/UX Desinging &amp; Building<span class="isub">My main passion</span></div>
+      <div class="iitem r d3">🌐 UI/UX Desinging<span class="isub">Full Stack Desinner</span></div>
       <div class="iitem r d4">🤖 Artificial Intelligence<span class="isub">Exploring AI/ML</span></div>
       <div class="iitem r d4">🎮 Gaming<span class="isub">Where it all started</span></div>
       <div class="iitem r d5">🔓 Open Source<span class="isub">Community &amp; code</span></div>
@@ -772,7 +769,6 @@ footer span:last-child{color:var(--cyan);font-family:var(--mono);}
   </div>
 </section>
 
-<!-- SKILLS -->
 <section id="skills">
   <div class="sh">
     <p class="sec-label r">02 — Skills</p>
@@ -782,16 +778,16 @@ footer span:last-child{color:var(--cyan);font-family:var(--mono);}
     <div class="sc r d1">
       <div class="sc-glow"></div>
       <div class="si">🌐</div>
-      <div class="sn">Web Dev</div>
-      <p class="sd">Building websites from structure to style to interactivity.</p>
-      <div class="stags"><span class="stag">HTML</span><span class="stag">CSS</span><span class="stag">JavaScript</span></div>
+      <div class="sn">UI Designing</div>
+      <p class="sd">Building websites UI from structure to style to interactivity.</p>
+      <div class="stags"><span class="stag">UI</span><span class="stag">Designing</span><span class="stag">Figma</span></div>
     </div>
     <div class="sc r d2">
       <div class="sc-glow"></div>
       <div class="si">⌨️</div>
-      <div class="sn">Programming</div>
-      <p class="sd">Writing logic, solving problems, making computers do things.</p>
-      <div class="stags"><span class="stag">Python</span><span class="stag">C++</span><span class="stag">Logic</span></div>
+      <div class="sn">UX Designing</div>
+      <p class="sd"> Understanding user behavior, creating user journeys, mapping seamless digital experiences.</p>
+      <div class="stags"><span class="stag">UX</span><span class="stag">RESEARCH</span><span class="stag">WIREFRAMING</span></div>
     </div>
     <div class="sc r d3">
       <div class="sc-glow"></div>
@@ -810,7 +806,6 @@ footer span:last-child{color:var(--cyan);font-family:var(--mono);}
   </div>
 </section>
 
-<!-- PROJECTS -->
 <section id="projects">
   <div class="ph">
     <p class="sec-label r">03 — Projects</p>
@@ -838,7 +833,6 @@ footer span:last-child{color:var(--cyan);font-family:var(--mono);}
   </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
   <div class="cl">
     <p class="sec-label r d1">04 — Contact</p>
@@ -883,7 +877,6 @@ const isLowEnd = navigator.hardwareConcurrency <= 4 || isMobile;
 (function(){
   const canvas = document.getElementById('bg-canvas');
 
-  // Use powerPreference hint for GPU
   const renderer = new THREE.WebGLRenderer({
     canvas,
     antialias: !isMobile,
@@ -893,7 +886,6 @@ const isLowEnd = navigator.hardwareConcurrency <= 4 || isMobile;
     depth: false
   });
 
-  // Cap pixel ratio: 1 on mobile, 1.5 on mid, 2 max on desktop
   const dpr = isMobile ? 1 : Math.min(window.devicePixelRatio, isLowEnd ? 1.5 : 2);
   renderer.setPixelRatio(dpr);
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -903,7 +895,6 @@ const isLowEnd = navigator.hardwareConcurrency <= 4 || isMobile;
   const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
   camera.position.z = 30;
 
-  // ── PARTICLES — fewer on low-end ──
   const count = isMobile ? 400 : isLowEnd ? 800 : 1400;
   const positions = new Float32Array(count * 3);
   const colors    = new Float32Array(count * 3);
@@ -931,7 +922,6 @@ const isLowEnd = navigator.hardwareConcurrency <= 4 || isMobile;
   const particles = new THREE.Points(geo, mat);
   scene.add(particles);
 
-  // ── WIREFRAME SHAPES — skip on mobile ──
   const meshes = [];
   if(!isMobile){
     const wmats = [
@@ -959,7 +949,6 @@ const isLowEnd = navigator.hardwareConcurrency <= 4 || isMobile;
     });
   }
 
-  // ── MOUSE PARALLAX — throttled ──
   let mouseX = 0, mouseY = 0, mousePending = false;
   if(!isMobile){
     document.addEventListener('mousemove', e => {
@@ -973,11 +962,9 @@ const isLowEnd = navigator.hardwareConcurrency <= 4 || isMobile;
     }, {passive:true});
   }
 
-  // ── PAUSE WHEN TAB HIDDEN ──
   let running = true;
   document.addEventListener('visibilitychange', () => { running = !document.hidden; });
 
-  // ── RESIZE — debounced ──
   let resizeTimer;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
@@ -988,16 +975,14 @@ const isLowEnd = navigator.hardwareConcurrency <= 4 || isMobile;
     }, 150);
   }, {passive:true});
 
-  // ── ANIMATE — delta-time capped ──
   let last = 0, t = 0;
   function animate(now){
     requestAnimationFrame(animate);
     if(!running) return;
-    const delta = Math.min((now - last) / 1000, 0.05); // cap at 50ms (20fps min)
+    const delta = Math.min((now - last) / 1000, 0.05);
     last = now;
     t += delta;
 
-    // Breathing particle opacity
     mat.opacity = (isMobile ? 0.5 : 0.6) + Math.sin(t * 0.4) * 0.05;
 
     particles.rotation.y = t * 0.025;
@@ -1011,7 +996,6 @@ const isLowEnd = navigator.hardwareConcurrency <= 4 || isMobile;
     });
 
     if(!isMobile){
-      // Smoother camera follow — two-stage easing
       camera.position.x += (mouseX * 2.5 - camera.position.x) * 0.03;
       camera.position.y += (-mouseY * 1.8 - camera.position.y) * 0.03;
       camera.lookAt(0, 0, 0);
@@ -1022,55 +1006,48 @@ const isLowEnd = navigator.hardwareConcurrency <= 4 || isMobile;
   requestAnimationFrame(animate);
 })();
 
-// ── CURSOR (desktop only) ──
+// ── CURSOR & ENVIRONMENT DETECTION ──
 const isTouchDevice = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+
+// Update body tag immediately to switch CSS layouts safely based on hardware capacity
+if (isTouchDevice) {
+  document.body.classList.add('touch-screen-active');
+}
+
 if(!isTouchDevice){
   const cur   = document.getElementById('cur');
   const ring  = document.getElementById('cur-ring');
   const trail = document.getElementById('cur-trail');
 
-  // Read actual rendered sizes once — avoids hardcoded magic numbers
-  // (getComputedStyle returns values AFTER CSS applies)
   function halfSize(el){
     const s = parseFloat(getComputedStyle(el).width) || 8;
     return s / 2;
   }
 
-  // Live mouse position — updated synchronously in mousemove, never throttled
   let mx = -200, my = -200;
-
-  // Lagged positions for ring and trail
   let rx = -200, ry = -200;
   let tx = -200, ty = -200;
 
-  // Lerp speeds — ring is slow/dreamy, trail is mid
   const RING_LERP  = 0.10;
   const TRAIL_LERP = 0.20;
 
-  // ── DOT: pixel-perfect, zero lag ──
-  // We use a single mousemove listener that writes the transform immediately.
-  // No rAF, no throttle — the browser coalesces events before paint anyway.
   document.addEventListener('mousemove', e => {
     mx = e.clientX;
     my = e.clientY;
-    const h = halfSize(cur);  // re-read in case size changed (hover state)
-    // Use Math.round to avoid subpixel blur on non-HiDPI screens
+    const h = halfSize(cur);
     cur.style.transform = `translate3d(${Math.round(mx - h)}px,${Math.round(my - h)}px,0)`;
   }, {passive:true});
 
-  // Click feedback — tiny squeeze
   document.addEventListener('mousedown', () => {
     cur.style.transform += ' scale(0.7)';
     document.body.classList.add('clicking');
   }, {passive:true});
   document.addEventListener('mouseup', () => {
     document.body.classList.remove('clicking');
-    // Re-snap after click (remove the scale override)
     const h = halfSize(cur);
     cur.style.transform = `translate3d(${Math.round(mx - h)}px,${Math.round(my - h)}px,0)`;
   }, {passive:true});
 
-  // ── RING + TRAIL: smooth lerp in rAF ──
   function animCursor(){
     const ringH  = halfSize(ring);
     const trailH = halfSize(trail);
@@ -1087,13 +1064,11 @@ if(!isTouchDevice){
   }
   animCursor();
 
-  // Hover state — changes ring size + color via CSS class
   document.querySelectorAll('a,button,.pi,.iitem,.sc,.sbox,.clink').forEach(el=>{
     el.addEventListener('mouseenter',()=>document.body.classList.add('ch'),   {passive:true});
     el.addEventListener('mouseleave',()=>document.body.classList.remove('ch'),{passive:true});
   });
 
-  // Hide / show when cursor leaves / enters the page
   document.addEventListener('mouseleave', ()=>{
     cur.style.opacity='0'; ring.style.opacity='0'; trail.style.opacity='0';
   }, {passive:true});
@@ -1102,7 +1077,7 @@ if(!isTouchDevice){
   }, {passive:true});
 }
 
-// ── SCROLL PROGRESS — passive + rAF ──
+// ── SCROLL PROGRESS ──
 const prog = document.getElementById('progress');
 let scrollPending = false;
 window.addEventListener('scroll', ()=>{
@@ -1115,7 +1090,6 @@ window.addEventListener('scroll', ()=>{
     scrollPending = false;
   });
 }, {passive:true});
-// switch progress bar to transform-based scaling
 prog.style.width = '100%';
 prog.style.transformOrigin = 'left';
 prog.style.transform = 'scaleX(0)';
@@ -1126,13 +1100,33 @@ const obs = new IntersectionObserver(es => es.forEach(e=>{
 }), {threshold:0.06, rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.r').forEach(el => obs.observe(el));
 
-// ── MOBILE MENU ──
+// ── FIXED MOBILE NAVIGATION LOGIC (TOUCH ONLY) ──
 const mm = document.getElementById('mm');
 const bgBtn = document.getElementById('bg');
-function openMenu(){ mm.classList.add('open'); bgBtn.classList.add('active'); }
-function closeMenu(){ mm.classList.remove('open'); bgBtn.classList.remove('active'); }
-bgBtn.addEventListener('click', openMenu);
-document.getElementById('mc').addEventListener('click', closeMenu);
+const mcBtn = document.getElementById('mc');
+
+function openMenu(){ 
+  mm.classList.add('open'); 
+  bgBtn.classList.add('active'); 
+}
+function closeMenu(){ 
+  mm.classList.remove('open'); 
+  bgBtn.classList.remove('active'); 
+}
+
+if (isTouchDevice) {
+  bgBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if(mm.classList.contains('open')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+  if(mcBtn) {
+    mcBtn.addEventListener('click', closeMenu);
+  }
+}
 function cm(){ closeMenu(); }
 
 // ── SEND BTN ──
@@ -1154,7 +1148,7 @@ document.getElementById('sendbtn').addEventListener('click', ()=>{
   msg.style.color='var(--cyan)';msg.style.borderColor='rgba(0,245,196,.3)';msg.style.background='rgba(0,245,196,.06)';
 });
 
-// ── 3D CARD TILT — desktop only ──
+// ── 3D CARD TILT ──
 if(!isTouchDevice){
   const card = document.querySelector('.hcard-wrap');
   const heroRight = document.querySelector('.hero-right');
