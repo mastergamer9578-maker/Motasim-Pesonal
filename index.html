@@ -4,7 +4,7 @@
 <link rel="icon" type="image/png" href="logo.png">
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Muhammad Motasim — Desingner</title>
+<title>Muhammad Motasim — Developer</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <style>
@@ -27,8 +27,7 @@
   --mono:'JetBrains Mono',monospace;
 }
 html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--text);font-family:var(--body);overflow-x:hidden;cursor:none;}
-*{cursor:none !important;}
+body{background:var(--bg);color:var(--text);font-family:var(--body);overflow-x:hidden;}
 
 /* ── CANVAS BG ── */
 #bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
@@ -61,6 +60,16 @@ body{background:var(--bg);color:var(--text);font-family:var(--body);overflow-x:h
 body.ch #cur{background:var(--purple);box-shadow:0 0 14px var(--purple),0 0 28px rgba(167,139,250,0.4);}
 body.ch #cur-ring{width:48px;height:48px;border-color:rgba(167,139,250,0.5);}
 body.clicking #cur-ring{width:26px;height:26px;border-color:rgba(0,245,196,0.9);}
+
+/* Natively hide browser cursor only on devices that support a fine pointer (Mouse) */
+@media (pointer: fine) {
+  body, * { cursor: none !important; }
+}
+
+/* Force hide custom cursor components on touch/coarse interfaces or mobile viewports */
+@media (pointer: coarse), (max-width: 768px) {
+  #cur, #cur-ring, #cur-trail { display: none !important; }
+}
 
 /* ── SCROLL REVEAL ── */
 .r{opacity:0;transform:translateY(32px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);}
@@ -110,7 +119,7 @@ nav{
   background:linear-gradient(135deg,var(--cyan),var(--purple));
   color:#020408;padding:.45rem 1.2rem;font-size:12px;font-weight:700;
   letter-spacing:.06em;text-transform:uppercase;
-  border:none;cursor:none;text-decoration:none;
+  border:none;text-decoration:none;
   border-radius:4px;
   transition:all .3s;box-shadow:0 0 20px rgba(0,245,196,0.3);
 }
@@ -194,7 +203,7 @@ nav{
 }
 .badge{
   display:inline-flex;align-items:center;gap:.6rem;
-  padding:.4rem 1rem;border-radius999px;
+  padding:.4rem 1rem;border-radius:999px;
   border:1px solid rgba(0,245,196,0.25);
   background:rgba(0,245,196,0.06);
   backdrop-filter:blur(10px);
@@ -212,7 +221,7 @@ h1{
   font-size:clamp(2.2rem,4.5vw,4rem);
   line-height:.95;letter-spacing:-.01em;
   color:var(--text);margin-bottom:1rem;
-  animation:fadeUp 1s .35s cubic-bezier(.22,1,.36,1) both;
+  animation:fadeUp idols .35s cubic-bezier(.22,1,.36,1) both;
 }
 h1 .grad{
   background:linear-gradient(135deg,var(--cyan) 0%,var(--purple) 50%,var(--pink) 100%);
@@ -243,7 +252,7 @@ h1 .outline{
   display:inline-flex;align-items:center;gap:.5rem;
   padding:.8rem 1.8rem;font-family:var(--body);
   font-size:13px;font-weight:600;letter-spacing:.04em;
-  text-decoration:none;cursor:none;transition:all .3s;border-radius:6px;
+  text-decoration:none;transition:all .3s;border-radius:6px;
 }
 .bp{
   background:linear-gradient(135deg,var(--cyan),var(--purple));
@@ -484,7 +493,7 @@ section{position:relative;z-index:1;}
 }
 .cl{padding:5rem 4rem;border-right:1px solid var(--border);}
 .cr{padding:5rem 4rem;}
-.cblurb{font-size:14px;color:var(--muted2);line-height:1.9;margin-bottom:2rem;}
+.cblurb font-size:14px;color:var(--muted2);line-height:1.9;margin-bottom:2rem;}
 .clinks{display:flex;flex-direction:column;gap:.75rem;}
 .clink{
   display:flex;align-items:center;gap:.9rem;
@@ -551,7 +560,6 @@ footer span:last-child{color:var(--cyan);font-family:var(--mono);}
   .hcard{max-width:280px;}
 }
 
-/* Base structural adjustments for narrow screens */
 @media(max-width:768px){
   nav,
   .mmenu,
@@ -567,10 +575,6 @@ footer span:last-child{color:var(--cyan);font-family:var(--mono);}
   .hcard-wrap{animation:none !important;}
   .iitem,.sc,.sbox,.clink,.pi{transition:background .2s,border-color .2s;}
 
-  body{cursor:auto;}
-  *{cursor:auto !important;}
-  a,button,.btn,.pi,.clink{cursor:pointer !important;}
-  #cur,#cur-ring,#cur-trail{display:none !important;}
   nav{padding:.9rem 1.5rem;}
   
   /* Layout shifts */
@@ -589,19 +593,9 @@ footer span:last-child{color:var(--cyan);font-family:var(--mono);}
   .cr{padding:3rem 1.5rem;}
   footer{flex-direction:column;gap:.5rem;text-align:center;padding:1.25rem 1.5rem;}
   .stats{grid-template-columns:1fr 1fr;}
-}
-
-/* ── STRICT DEVICE CATEGORIZATION ── */
-/* Laptop & Desktop (Non-touch screens): Force menu items to show, completely hide mobile burger assets */
-body:not(.touch-screen-active) .nav-links { display: flex !important; }
-body:not(.touch-screen-active) .burger { display: none !important; }
-body:not(.touch-screen-active) .mmenu { display: none !important; }
-
-/* Mobile & Tablet (Actual hardware touch screens below break point): Apply mobile styling override */
-@media(max-width:768px) {
-  body.touch-screen-active .nav-links, 
-  body.touch-screen-active .nav-cta { display: none !important; }
-  body.touch-screen-active .burger { display: flex !important; }
+  
+  .nav-links, .nav-cta { display: none !important; }
+  .burger { display: flex !important; }
 }
 
 @media(max-width:480px){
@@ -675,7 +669,7 @@ body:not(.touch-screen-active) .mmenu { display: none !important; }
         <span class="outline">MOTASIM</span>
       </h1>
       <p class="role">// High School <span class="hl">Designer</span> · Pakistan 🇵🇰</p>
-      <p class="hdesc">High school student obsessed with computers, UI/UX Desingning, and all things tech. I turn curiosity into real software — one project at a time.</p>
+      <p class="hdesc">High school student obsessed with computers, UI/UX Designing, and all things tech. I turn curiosity into real software — one project at a time.</p>
       <div class="cta">
         <a href="#projects" class="btn bp"><span>See My Work →</span></a>
         <a href="#contact" class="btn bo">Get In Touch</a>
@@ -701,7 +695,7 @@ body:not(.touch-screen-active) .mmenu { display: none !important; }
             <div>&nbsp;&nbsp;<span class="v">location</span>: <span class="s">"Pakistan 🇵🇰"</span>,</div>
             <div>&nbsp;&nbsp;<span class="v">hafiz</span>: <span class="k">true</span>,</div>
             <div>&nbsp;&nbsp;<span class="v">stack</span>: [<span class="s">"UI"</span>, <span class="s">"UX"</span>,</div>
-            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s">"Desingner"</span>],</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s">"Designer"</span>],</div>
             <div>&nbsp;&nbsp;<span class="v">passion</span>: <span class="s">"Building things"</span></div>
             <div>};<span class="hcard-cursor"></span></div>
           </div>
@@ -760,8 +754,8 @@ body:not(.touch-screen-active) .mmenu { display: none !important; }
     <div class="ilist">
       <div class="iitem r d2">📖 Hafiz e Quran<span class="isub">Full Quran memorized</span></div>
       <div class="iitem r d2">💻 Computers &amp; Hardware<span class="isub">How things work</span></div>
-      <div class="iitem r d3">⌨️ UI/UX Desinging &amp; Building<span class="isub">My main passion</span></div>
-      <div class="iitem r d3">🌐 UI/UX Desinging<span class="isub">Full Stack Desinner</span></div>
+      <div class="iitem r d3">⌨️ UI/UX Designing &amp; Building<span class="isub">My main passion</span></div>
+      <div class="iitem r d3">🌐 UI/UX Designing<span class="isub">Full Stack Designer</span></div>
       <div class="iitem r d4">🤖 Artificial Intelligence<span class="isub">Exploring AI/ML</span></div>
       <div class="iitem r d4">🎮 Gaming<span class="isub">Where it all started</span></div>
       <div class="iitem r d5">🔓 Open Source<span class="isub">Community &amp; code</span></div>
@@ -812,7 +806,7 @@ body:not(.touch-screen-active) .mmenu { display: none !important; }
     <h2 class="sec-h2 r d1">Things I've Built</h2>
   </div>
   <div class="proj-list">
-    <a href="https://ui-ux-desingner.vercel.app/" target="_blank" class="pi r d2">
+    <a href="https://n8n-pro-web.vercel.app" target="_blank" class="pi r d2">
       <div class="pn">001</div>
       <div>
         <div class="pt">Personal Portfolio Website</div>
@@ -857,7 +851,7 @@ body:not(.touch-screen-active) .mmenu { display: none !important; }
       <div><label class="fl">Your Name</label><input class="fi" id="fname" type="text" placeholder="Your name"/></div>
       <div><label class="fl">Your Email</label><input class="fi" id="femail" type="email" placeholder="your@email.com"/></div>
       <div><label class="fl">Message</label><textarea class="fi" id="fmessage" rows="4" placeholder="What's on your mind?"></textarea></div>
-      <button class="btn bp" id="sendbtn" style="align-self:flex-start;cursor:pointer;"><span>Send Message →</span></button>
+      <button class="btn bp" id="sendbtn" style="align-self:flex-start;"><span>Send Message →</span></button>
     </div>
   </div>
 </section>
@@ -1007,30 +1001,24 @@ const isLowEnd = navigator.hardwareConcurrency <= 4 || isMobile;
 })();
 
 // ── CURSOR & ENVIRONMENT DETECTION ──
-const isTouchDevice = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+const isTouchDevice = ('ontouchstart' in window) || navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches;
 
-// Update body tag immediately to switch CSS layouts safely based on hardware capacity
-if (isTouchDevice) {
-  document.body.classList.add('touch-screen-active');
+// Global coordinates for tracking
+let mx = -200, my = -200;
+let rx = -200, ry = -200;
+let tx = -200, ty = -200;
+
+const cur   = document.getElementById('cur');
+const ring  = document.getElementById('cur-ring');
+const trail = document.getElementById('cur-trail');
+
+function halfSize(el){
+  const s = parseFloat(getComputedStyle(el).width) || 8;
+  return s / 2;
 }
 
-if(!isTouchDevice){
-  const cur   = document.getElementById('cur');
-  const ring  = document.getElementById('cur-ring');
-  const trail = document.getElementById('cur-trail');
-
-  function halfSize(el){
-    const s = parseFloat(getComputedStyle(el).width) || 8;
-    return s / 2;
-  }
-
-  let mx = -200, my = -200;
-  let rx = -200, ry = -200;
-  let tx = -200, ty = -200;
-
-  const RING_LERP  = 0.10;
-  const TRAIL_LERP = 0.20;
-
+// Custom pointer tracking wrapper (Only executes if it's a mouse-driven interface)
+if (!isTouchDevice) {
   document.addEventListener('mousemove', e => {
     mx = e.clientX;
     my = e.clientY;
@@ -1042,22 +1030,31 @@ if(!isTouchDevice){
     cur.style.transform += ' scale(0.7)';
     document.body.classList.add('clicking');
   }, {passive:true});
+
   document.addEventListener('mouseup', () => {
     document.body.classList.remove('clicking');
     const h = halfSize(cur);
     cur.style.transform = `translate3d(${Math.round(mx - h)}px,${Math.round(my - h)}px,0)`;
   }, {passive:true});
 
+  document.addEventListener('mouseleave', ()=>{
+    cur.style.opacity='0'; ring.style.opacity='0'; trail.style.opacity='0';
+  }, {passive:true});
+  
+  document.addEventListener('mouseenter', ()=>{
+    cur.style.opacity='1'; ring.style.opacity='1'; trail.style.opacity='1';
+  }, {passive:true});
+
   function animCursor(){
     const ringH  = halfSize(ring);
     const trailH = halfSize(trail);
 
-    rx += (mx - rx) * RING_LERP;
-    ry += (my - ry) * RING_LERP;
+    rx += (mx - rx) * 0.10;
+    ry += (my - ry) * 0.10;
     ring.style.transform = `translate3d(${rx - ringH}px,${ry - ringH}px,0)`;
 
-    tx += (mx - tx) * TRAIL_LERP;
-    ty += (my - ty) * TRAIL_LERP;
+    tx += (mx - tx) * 0.20;
+    ty += (my - ty) * 0.20;
     trail.style.transform = `translate3d(${tx - trailH}px,${ty - trailH}px,0)`;
 
     requestAnimationFrame(animCursor);
@@ -1068,13 +1065,11 @@ if(!isTouchDevice){
     el.addEventListener('mouseenter',()=>document.body.classList.add('ch'),   {passive:true});
     el.addEventListener('mouseleave',()=>document.body.classList.remove('ch'),{passive:true});
   });
-
-  document.addEventListener('mouseleave', ()=>{
-    cur.style.opacity='0'; ring.style.opacity='0'; trail.style.opacity='0';
-  }, {passive:true});
-  document.addEventListener('mouseenter', ()=>{
-    cur.style.opacity='1'; ring.style.opacity='1'; trail.style.opacity='1';
-  }, {passive:true});
+} else {
+  // Completely clear opacities and hide cursor references for touch monitors
+  if(cur) cur.style.display = 'none';
+  if(ring) ring.style.display = 'none';
+  if(trail) trail.style.display = 'none';
 }
 
 // ── SCROLL PROGRESS ──
@@ -1100,7 +1095,7 @@ const obs = new IntersectionObserver(es => es.forEach(e=>{
 }), {threshold:0.06, rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.r').forEach(el => obs.observe(el));
 
-// ── FIXED MOBILE NAVIGATION LOGIC (TOUCH ONLY) ──
+// ── MOBILE MENU TOGGLE ──
 const mm = document.getElementById('mm');
 const bgBtn = document.getElementById('bg');
 const mcBtn = document.getElementById('mc');
@@ -1114,22 +1109,22 @@ function closeMenu(){
   bgBtn.classList.remove('active'); 
 }
 
-if (isTouchDevice) {
-  bgBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if(mm.classList.contains('open')) {
-      closeMenu();
-    } else {
-      openMenu();
-    }
-  });
-  if(mcBtn) {
-    mcBtn.addEventListener('click', closeMenu);
+bgBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  if(mm.classList.contains('open')) {
+    closeMenu();
+  } else {
+    openMenu();
   }
+});
+
+if(mcBtn) {
+  mcBtn.addEventListener('click', closeMenu);
 }
+
 function cm(){ closeMenu(); }
 
-// ── SEND BTN ──
+// ── SEND FORM VALIDATION ──
 document.getElementById('sendbtn').addEventListener('click', ()=>{
   const n = document.getElementById('fname').value.trim();
   const e = document.getElementById('femail').value.trim();
