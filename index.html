@@ -98,8 +98,8 @@ body.ch #cur{background:var(--purple);box-shadow:0 0 14px var(--purple),0 0 28px
 body.ch #cur-ring{width:48px;height:48px;border-color:rgba(167,139,250,0.5);}
 body.clicking #cur-ring{width:26px;height:26px;border-color:rgba(0,245,196,0.9);}
 
-/* Natively hide browser cursor only on devices that support a fine pointer (Mouse) */
-@media (pointer: fine) {
+/* Natively hide browser cursor only on devices that support a fine pointer (Mouse) and are desktop width */
+@media (pointer: fine) and (min-width: 993px) {
   body, * { cursor: none !important; }
 }
 
@@ -1111,14 +1111,15 @@ document.querySelectorAll('.theme-dot').forEach(dot => {
 });
 
 // ── CURSOR INTERACTION PATTERNS ──
-const isTouchDevice = ('ontouchstart' in window) || navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches;
+// Strictly check viewport width for mobile bounds, ignoring touch properties on desktop viewports
+const hideCustomCursor = window.innerWidth <= 992;
 
 let mx = -200, my = -200, rx = -200, ry = -200, tx = -200, ty = -200;
 const cur = document.getElementById('cur'), ring = document.getElementById('cur-ring'), trail = document.getElementById('cur-trail');
 
 function halfSize(el){ return (parseFloat(getComputedStyle(el).width) || 8) / 2; }
 
-if (!isTouchDevice && window.innerWidth > 992) {
+if (!hideCustomCursor) {
   document.addEventListener('mousemove', e => {
     mx = e.clientX; my = e.clientY;
     const h = halfSize(cur);
@@ -1198,7 +1199,7 @@ document.getElementById('sendbtn').addEventListener('click', ()=>{
 });
 
 // ── INTERACTIVE MOUSE HANGS ──
-if(!isTouchDevice && window.innerWidth > 992){
+if(window.innerWidth > 992){
   const card = document.querySelector('.hcard-wrap'), heroRight = document.querySelector('.hero-right');
   if(card && heroRight){
     heroRight.addEventListener('mousemove', e=>{
