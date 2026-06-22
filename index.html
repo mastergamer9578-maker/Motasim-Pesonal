@@ -579,8 +579,8 @@ section{position:relative;z-index:1;}
 }
 .stag:hover{border-color:var(--cyan);color:var(--cyan);}
 
-/* ── MASTER VAULT ── */
-#master-vault {
+/* ── MASTER VAULT & MASTER KANBAN ── */
+#master-vault, #master-kanban {
   display: grid;
   grid-template-columns: 1fr 1fr;
   border-bottom: 1px solid var(--border);
@@ -748,7 +748,7 @@ footer span:last-child{color:var(--cyan);font-family:var(--mono);}
   #about{grid-template-columns:1fr;}
   .al{border-right:none;border-bottom:1px solid var(--border);padding:3rem 1.5rem;}
   .ar{padding:3rem 1.5rem;}
-  #master-vault{grid-template-columns:1fr;}
+  #master-vault, #master-kanban{grid-template-columns:1fr;}
   .mv-left{border-right:none;border-bottom:1px solid var(--border);padding:3rem 1.5rem;}
   .mv-right{padding:3rem 1.5rem;}
   .sh,.ph{padding:3rem 1.5rem 1.5rem;}
@@ -797,7 +797,7 @@ footer span:last-child{color:var(--cyan);font-family:var(--mono);}
   <button class="mclose" id="mc">✕ close</button>
   <a href="#about" class="mlink" onclick="cm()"><span class="mmenu-num">01</span><span class="mtxt">About</span></a>
   <a href="#skills" class="mlink" onclick="cm()"><span class="mmenu-num">02</span><span class="mtxt">Skills</span></a>
-  <a href="#master-vault" class="mlink" onclick="cm()"><span class="mmenu-num">03</span><span class="mtxt">Vault</span></a>
+  <a href="#master-vault" class="mlink" onclick="cm()"><span class="mmenu-num">03</span><span class="mtxt">My Apps</span></a>
   <a href="#projects" class="mlink" onclick="cm()"><span class="mmenu-num">04</span><span class="mtxt">Work</span></a>
   <a href="#contact" class="mlink" onclick="cm()"><span class="mmenu-num">05</span><span class="mtxt">Contact</span></a>
   <div class="mmenu-cta-wrap">
@@ -816,7 +816,7 @@ footer span:last-child{color:var(--cyan);font-family:var(--mono);}
   <div class="nav-links">
     <a href="#about">About</a>
     <a href="#skills">Skills</a>
-    <a href="#master-vault">Master Vault</a>
+    <a href="#master-vault">My Apps</a>
     <a href="#projects">Work</a>
     <a href="#contact">Contact</a>
     <div class="style-switcher" id="style-switcher">
@@ -979,7 +979,7 @@ footer span:last-child{color:var(--cyan);font-family:var(--mono);}
       <p>Built with robust architectural patterns, a clear focus on data layer isolation, and local scoping mechanisms to prevent data leakage or volatile state preservation failures.</p>
     </div>
     <div class="cta r d4" style="margin-top: 2rem;">
-      <a href="master-vault.exe" download class="btn bp"><span>Download for Windows 🗔</span></a>
+      <a href="Master Vault_2.0.0_x64-setup.exe" download class="btn bp"><span>Download for Windows 🗔</span></a>
     </div>
   </div>
   <div class="mv-right">
@@ -1010,13 +1010,53 @@ footer span:last-child{color:var(--cyan);font-family:var(--mono);}
   </div>
 </section>
 
+<section id="master-kanban">
+  <div class="mv-left">
+    <p class="sec-label r d1">03 — Production App</p>
+    <h2 class="sec-h2 r d2">Master Kanban</h2>
+    <div class="atext r d3">
+      <p><strong>Master Kanban</strong> is an ultra-fast, performance-oriented native Windows desktop board built for ultimate task workflow optimization. Engineered with asynchronous item processing architectures, it allows real-time task management and layout shifts with zero input latency.</p>
+      <p>Designed to provide robust offline productivity pipelines, advanced tag assignment layers, and local data synchronization layers for individuals who value distraction-free structural engineering.</p>
+    </div>
+    <div class="cta r d4" style="margin-top: 2rem;">
+      <a href="Master Kanban_0.1.0_x64-setup.exe" download class="btn bp"><span>Download for Windows 🗔</span></a>
+    </div>
+  </div>
+  <div class="mv-right">
+    <div class="mv-tech-card r d3">
+      <div class="mv-tech-header">
+        <span class="mv-tech-title">>_ board_config.json</span>
+        <div class="hcard-dots">
+          <div class="hcard-dot" style="background:#a78bfa; width:6px; height:6px;"></div>
+        </div>
+      </div>
+      <div class="hcard-code" style="font-size: 11.5px; line-height: 1.8;">
+        <div><span class="k">"engine"</span>: <span class="s">"Async-UI-Thread"</span>,</div>
+        <div><span class="k">"local_storage"</span>: <span class="s">"SQLite-Encrypted"</span>,</div>
+        <div><span class="k">"drag_latency"</span>: <span class="s">"0ms"</span>,</div>
+        <div><span class="k">"state_sync"</span>: <span class="k">true</span></div>
+      </div>
+      <div class="mv-features">
+        <div class="mv-feature-item">
+          <span class="mv-feature-icon">✓</span>
+          <span><strong>Instant State Mutation:</strong> Zero frame-drop interactions during complex cross-lane drag operations.</span>
+        </div>
+        <div class="mv-feature-item">
+          <span class="mv-feature-icon">✓</span>
+          <span><strong>Data Layer Encryption:</strong> Board architecture remains safely cached and completely private locally.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="projects">
   <div class="ph">
     <p class="sec-label r">04 — Projects</p>
     <h2 class="sec-h2 r d1">Things I've Built</h2>
   </div>
   <div class="proj-list">
-    <a href="https://ui-ux-desingner.vercel.app/" target="_blank" class="pi r d2">
+    <a href="https://n8n-pro-web.vercel.app" target="_blank" class="pi r d2">
       <div class="pn">001</div>
       <div>
         <div class="pt">Personal Portfolio Website</div>
